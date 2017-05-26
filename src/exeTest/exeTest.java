@@ -16,6 +16,7 @@ public class exeTest {
 	public int sero = 5;
 	public int pointer = 1;
 	public int pointer2 = 0;
+	public int forcount = 0;
 	
 	// 조각 좌표
 	public LinkedHashMap<Integer, Integer[]> grid = new LinkedHashMap<>();
@@ -35,7 +36,7 @@ public class exeTest {
 
 		// ArrayList<ArrayList<Integer>> grid = new
 		// ArrayList<ArrayList<Integer>>();
-		String[] temp1 = {"6","c"};
+		/*String[] temp1 = {"6","c"};
 		String[] temp2 = {"6","c"};
 		String[] temp3 = {"6","c"};
 		String[] temp4 = {"f","a"};
@@ -60,6 +61,32 @@ public class exeTest {
 		String[] temp23 = {"3","4"};
 		String[] temp24 = {"d","1"};
 		String[] temp25 = {"3","f"};
+		*/
+		String[] temp1 = {"d","b"};
+		String[] temp2 = {"6","c"};
+		String[] temp3 = {"3","4","c","a","f","d"};
+		String[] temp4 = {"2"};
+		String[] temp5 = {"1","3"};
+		String[] temp6 = {"1","3","a","c"};
+		String[] temp7 = {"f","a"};
+		String[] temp8 = {"1","d","a","6"};
+		String[] temp9 = {"f","c","3","4"};
+		String[] temp10 = {"3","4"};
+		String[] temp11 = {"1","3"};
+		String[] temp12 = {"1","3"};
+		String[] temp13 = {"2","b"};
+		String[] temp14 = {"b","4"};
+		String[] temp15 = {"3","1","a","c"};
+		String[] temp16 = {"2","b"};
+		String[] temp17 = {"a","c"};
+		String[] temp18 = {"1","3","f","6"};
+		String[] temp19 = {"1","d"};
+		String[] temp20 = {"6","c"};
+		String[] temp21 = {"d","4","f","a","6","c"};
+		String[] temp22 = {"3","1","a","c"};
+		String[] temp23 = {"1","d","a","4","c","6"};
+		String[] temp24 = {"f","a"};
+		String[] temp25 = {"2"};
 		
 		et.piece.put(1, temp1);
 		et.piece.put(2, temp2);
@@ -99,37 +126,72 @@ public class exeTest {
 			}
 		}
 */
-		//et.grid.forEach((k, v) -> System.out.println("key: " + k + " value:" + v[0] + "/" + v[1]));
+		et.grid.forEach((k, v) -> System.out.println("key: " + k + " value:" + v[0] + "/" + v[1]));
 		//System.out.println(et.matching("1"));
 		
 		//manage
 		int pointerLimit = et.garo * et.sero;
 		for (; et.pointer <= pointerLimit; et.pointer++) {
-						
+			et.forcount++;	
+			//if(et.forcount>50) return;
+			//포인터를 넣어서 필요한 조건과 필요 없는 조건에 부합하는 조각들을 후보자에 넣음
 			et.piece_candidate.put(et.pointer,et.findPieces( et.findNeedQualifi(et.getYX(et.pointer)),  et.findNeedlessQualifi(et.getYX(et.pointer)) ));
-			et.piece_candidate.forEach((k, v) -> System.out.println(k+":num " + v.toString()));
-			//반환된 조건만족 피스의 갯수가 0이면 포인터를 -1
+			//et.piece_candidate.forEach((k, v) -> System.out.println(k+":num " + v.toString()) );
+			
+			//et.pointer2 = 0;
+			
 			//System.out.println("pointer  "+et.pointer);
 			//if(et.pointer>1) 
 				//System.out.println(et.piece_candidate.get(et.pointer).toString());
-			
+			//반환된 조건만족 조각의 갯수가 0이면 포인터를 -1
 			if (et.piece_candidate.get(et.pointer).size() < 1 ) {
-				//System.out.println("1번");
+				//System.out.println("1번 if 반환된 조건만족 피스의 갯수가0//"+et.pointer+"//"+et.pointer2);
 				et.pointer--;
-				et.pointer2++;
+				//et.pointer2++; 
+				//et.sol.get(et.pointer);//포인터가 -1 됏을때 해답지에 x번째칸에 들어있는 조각 번호
+				//후보자의 맵중 특정 포인터의 배열중 값이 들어있는 방 번호 
+				//System.out.println(et.sol.get(et.pointer));
+				et.pointer2 = (et.piece_candidate.get(et.pointer).indexOf(et.sol.get(et.pointer)))+1; // 0 ~
+				//System.out.println("1번 if 변경 후//"+et.pointer+"//"+et.pointer2);
+				//System.out.println("1번 if 반환된 조건만족 피스의 갯수가0//"+et.pointer+"//"+et.pointer2);
+				//return;
+				// 값 넣고 컨티누 해야 하나
+				
+				/*System.out.print(" /cnt "+et.forcount);
+				System.out.print(" /p "+et.pointer);
+				System.out.print(" /p2 "+et.pointer2);
+				System.out.println(" /can_siz "+et.piece_candidate.get(et.pointer).size());
+				et.sol.put(et.pointer, et.piece_candidate.get(et.pointer).get(et.pointer2));
+				System.out.println(et.sol.toString());
+				continue;*/
+				//피스후보의 갯수를 포인터2가 넘어서면 포인터2 초기화0 , 포인터는 -1
+				/*if (et.pointer2>=et.piece_candidate.get(et.pointer).size()) {
+					System.out.println("2번 피스후보의 갯수를 포인터2가 넘어서");
+					et.pointer--;
+					et.pointer2 = et.piece_candidate.get(et.pointer).indexOf(et.sol.get(et.pointer))+1;
+					et.pointer--;
+					//et.pointer2 = 0;
+					continue;
+				}*/
+				while ( et.piece_candidate.get(et.pointer).size() <= (et.piece_candidate.get(et.pointer).indexOf(et.sol.get(et.pointer)))+1 ){
+					et.pointer--;
+					et.pointer2 = (et.piece_candidate.get(et.pointer).indexOf(et.sol.get(et.pointer)))+1;
+				}
+				et.pointer--;
 				continue;
 			}
 			
-			//피스후보의 갯수를 포인터2가 넘어서면 포인터2 초기화0 , 포인터는 -1
-			if (et.pointer2>et.piece_candidate.get(et.pointer).size()) {
-				System.out.println("2번");
-				et.pointer--;
-				et.pointer2 = 0;
-				continue;
-			}
+			
+			/*System.out.print(" /cnt "+et.forcount);
+			System.out.print(" /p "+et.pointer);
+			System.out.print(" /p2 "+et.pointer2);
+			System.out.println(" /can_siz "+et.piece_candidate.get(et.pointer).size());*/
 			et.sol.put(et.pointer, et.piece_candidate.get(et.pointer).get(et.pointer2));
-			System.out.println(et.pointer);
-			System.out.println(et.piece_candidate.get(et.pointer).get(et.pointer2));
+			et.pointer2 = 0;
+			System.out.println(et.forcount+ " / " +et.sol.toString());
+			//et.piece_candidate.forEach((k, v) -> System.out.print(k+":num " + v.toString()));
+			//System.out.println(et.pointer);
+			//System.out.println(et.piece_candidate.get(et.pointer).get(et.pointer2));
 			//if(et.pointer>1) return;
 		}
 		
@@ -203,7 +265,6 @@ public class exeTest {
 				if ( Arrays.asList(range1).contains(piece_cont1[i]) )
 				ret.add( matching(piece_cont1[i]) );
 			}
-			
 		}
 		if (y>0) {
 			//above
@@ -215,10 +276,7 @@ public class exeTest {
 				if ( Arrays.asList(range2).contains(piece_cont2[j]) )
 				ret.add( matching(piece_cont2[j]) );
 			}
-			
-			
 		}
-		
 		return ret;
 	}
 	public ArrayList<String> findNeedlessQualifi(Integer[] posi_arr){
@@ -236,21 +294,43 @@ public class exeTest {
 			ret.add("f");
 		}
 					
-		if (y>=this.sero) {
+		if (y>=this.sero-1) {
 			ret.add("a");
 			ret.add("b");
 			ret.add("c");
 		}
-		if (x>=this.garo) {
+		if (x>=this.garo-1) {
 			ret.add("4");
 			ret.add("5");
 			ret.add("6");
 		}
+		if (x>0){
+			//left
+			int target1 = getArrNum(y,x-1);
+			int piece_num1 = this.sol.get(target1);
+			String[] piece_cont1 = this.piece.get(piece_num1);
+			String[] range1 = {"4","5","6"};
+			
+			for (int i = 0; i < range1.length; i++) {
+				if ( !Arrays.asList(piece_cont1).contains(range1[i]) ){
+				ret.add( matching(range1[i]) );
+				//System.out.println("no need "+matching(range1[i]));
+				}
+			}
+		}
+		if (y>0) {
+			//above
+			int target2 = getArrNum(y-1,x);
+			int piece_num2 = this.sol.get(target2);
+			String[] piece_cont2 = this.piece.get(piece_num2);
+			String[] range2 = {"a","b","c"};
+			for (int j = 0; j < range2.length; j++) {
+				if ( !Arrays.asList(piece_cont2).contains(range2[j]) )
+				ret.add( matching(range2[j]) );
+			}
+		}
 		return ret;
 	}
-	
-	
-	
 	// 좌표 받아서 배열 번호 돌려주는 함수
 	public Integer getArrNum(Integer y , Integer x){
 		return (y*5) + x + 1;
@@ -269,7 +349,7 @@ public class exeTest {
 		ArrayList<Integer> ret = new ArrayList<>();
 		boolean needfg = true;
 		boolean needlessfg = true;
-		
+		boolean containFront = false;
 		
 		for (int i = 1; i <= this.piece.size() ; i++) {						//전체 조각의 길이 만큼
 			
@@ -290,17 +370,20 @@ public class exeTest {
 					//if ( !IntStream.of(this.piece.get(i)).anyMatch(v -> v == needless.get(j2)) ) needlessfg = false;
 					if ( Arrays.asList(this.piece.get(i)).contains(needless.get(j2)) ) needlessfg = false;
 					
-				}			
-				
+				}
+				containFront = false;
+				//if( this.sol.containsValue(i) ) containFront = true;
+				//System.out.println("containFront "+ this.sol.toString());
+				for (int o = 1; o < this.pointer; o++) {
+					//System.out.println(this.sol.get(o)+" //// "+i);
+					
+					if ( this.sol.get(o)==i ) containFront = true;					
+				}
+				//et.piece_candidate.forEach((k, v) -> System.out.println(k+":num " + v.toString()));
 				// 해당 피스 번호 넣는 위치
-				if(needfg && needlessfg)ret.add(i);
-			
+				if(needfg && needlessfg && !containFront)ret.add(i);
 			//}
-			
 		}
-		
-		
-		
 		
 		return ret;
 	}

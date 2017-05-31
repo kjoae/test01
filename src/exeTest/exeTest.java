@@ -12,8 +12,8 @@ import javax.swing.SwingConstants;
 
 public class exeTest {
 	
-	public int garo = 5;
-	public int sero = 5;
+	public int garo = 3;
+	public int sero = 4;
 	public int pointer = 1;
 	public int pointer2 = 0;
 	public int forcount = 0;
@@ -62,6 +62,7 @@ public class exeTest {
 		String[] temp24 = {"d","1"};
 		String[] temp25 = {"3","f"};
 		*/
+		/*
 		String[] temp1 = {"d","b"};
 		String[] temp2 = {"6","c"};
 		String[] temp3 = {"3","4","c","a","f","d"};
@@ -87,6 +88,49 @@ public class exeTest {
 		String[] temp23 = {"1","d","a","4","c","6"};
 		String[] temp24 = {"f","a"};
 		String[] temp25 = {"2"};
+		*/
+		/*
+		//200
+		String[] temp1 = {};
+		String[] temp2 = {"4","c"};
+		String[] temp3 = {"f","4"};
+		String[] temp4 = {"a","d"};
+		String[] temp5 = {"d","4"};
+		String[] temp6 = {"f","6"};
+		String[] temp7 = {};
+		String[] temp8 = {"d","c"};
+		String[] temp9 = {"3","4"};
+		String[] temp10 = {"f","a"};
+		String[] temp11 = {"f","6"};
+		String[] temp12 = {"d","6"};
+		String[] temp13 = {"f","6"};
+		String[] temp14 = {"a","4"};
+		String[] temp15 = {"d","6"};
+		String[] temp16 = {"f","6"};
+		String[] temp17 = {"6","c"};
+		String[] temp18 = {"1","d","4","6"};
+		String[] temp19 = {"f","6"};
+		String[] temp20 = {"d","f","4","6"};
+		String[] temp21 = {"d","f","3","4"};
+		String[] temp22 = {"3","4"};
+		String[] temp23 = {"1","d"};
+		String[] temp24 = {"f","4"};
+		String[] temp25 = {"1","d"};
+		*/
+		
+		//201
+		String[] temp1 = {"a","6"};
+		String[] temp2 = {"f","c"};
+		String[] temp3 = {"a","c","1","f","3","6"};
+		String[] temp4 = {};
+		String[] temp5 = {};
+		String[] temp6 = {"d","3"};
+		String[] temp7 = {};
+		String[] temp8 = {};
+		String[] temp9 = {"a","c"};
+		String[] temp10 = {"1","3","d","a","4","c"};
+		String[] temp11 = {"1","4"};
+		String[] temp12 = {"1","3"};
 		
 		et.piece.put(1, temp1);
 		et.piece.put(2, temp2);
@@ -100,6 +144,7 @@ public class exeTest {
 		et.piece.put(10, temp10);
 		et.piece.put(11, temp11);
 		et.piece.put(12, temp12);
+		/*
 		et.piece.put(13, temp13);
 		et.piece.put(14, temp14);
 		et.piece.put(15, temp15);
@@ -333,7 +378,7 @@ public class exeTest {
 	}
 	// 좌표 받아서 배열 번호 돌려주는 함수
 	public Integer getArrNum(Integer y , Integer x){
-		return (y*5) + x + 1;
+		return (y*this.garo) + x + 1;
 	}
 	// 배열번호 받아서 좌표 반환
 	public Integer[] getYX(Integer num){
